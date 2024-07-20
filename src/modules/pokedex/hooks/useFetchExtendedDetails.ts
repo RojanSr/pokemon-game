@@ -10,11 +10,11 @@ interface PokemonSpeciesResponse {
   genera: { genus: string; language: { name: string } }[]; // Species of Pokemon
 }
 
-const fetchPokemonDetails = async (pokemonName: string) => {
+const fetchExtendedDetails = async (pokemonName: string) => {
   if (!pokemonName) return;
   try {
     const response = await axios.get<PokemonSpeciesResponse>(
-      `${api.pokemon_data}/${pokemonName}`
+      `${api.pokemon_extended_data}/${pokemonName}`
     );
     return response;
   } catch (err) {
@@ -22,12 +22,18 @@ const fetchPokemonDetails = async (pokemonName: string) => {
   }
 };
 
-const useFetchPokemonDetails = (pokemonName: string) => {
+const useFetchExtendedDetails = (pokemonName: string) => {
   return useQuery({
-    queryKey: [api.pokemon_data],
-    queryFn: () => fetchPokemonDetails(pokemonName),
+    queryKey: [api.pokemon_extended_data],
+    queryFn: () => fetchExtendedDetails(pokemonName),
     select: (data) => data?.data,
+    enabled: !!pokemonName,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: 1,
+    retryDelay: 3000,
   });
 };
 
-export default useFetchPokemonDetails;
+export default useFetchExtendedDetails;

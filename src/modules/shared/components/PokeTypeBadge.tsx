@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
-import { PokemonDetails } from "../../pokedex/hooks/useFetchPokemonList";
 import getBadgeColor from "../utils/getBadgeColor";
+import { PokemonDetails } from "../../pokedex/types";
 
 interface Props {
   type: PokemonDetails["types"][0];

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useMemo } from "react";
 import {
   Box,
   Center,
@@ -10,17 +10,17 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import useFetchPokemonDetails from "../hooks/useFetchPokemonDetails";
-import { PokemonDetails } from "../hooks/useFetchPokemonList";
 import { useEffect, useState } from "react";
-import { noOfBadgesToShow } from "../../shared/constants";
-import PokeTypeBadge from "../../shared/components/PokeTypeBadge";
-import hoverShowTypes from "../utils/hoverShowTypes";
 import { useQueryClient } from "@tanstack/react-query";
-import { api } from "../../shared/api";
-import CapsuleText from "../../shared/components/common/CapsuleText";
-import PokeStats from "./PokeStats";
 import { IoMdVolumeHigh } from "react-icons/io";
+import useFetchPokemonDetails from "../../hooks/useFetchExtendedDetails";
+import { api } from "../../../shared/api";
+import { noOfBadgesToShow } from "../../../shared/constants";
+import PokeTypeBadge from "../../../shared/components/PokeTypeBadge";
+import hoverShowTypes from "../../utils/hoverShowTypes";
+import CapsuleText from "../../../shared/components/common/CapsuleText";
+import PokeStats from "../PokeStats";
+import { PokemonDetails } from "../../types";
 
 interface Props {
   list: PokemonDetails | undefined;
@@ -30,20 +30,22 @@ const PokeCardExpanded = ({ list }: Props) => {
   const queryClient = useQueryClient();
   const [genera, setGenera] = useState<string>();
 
-  const { data, isLoading, isError } = useFetchPokemonDetails(
-    list?.name || "bulbasaur" // Charizard because it's my favorite pokemon
-  );
+  const pokeName = useMemo(() => {
+    return list?.name;
+  }, [list]);
+
+  const { data, isLoading, isError } = useFetchPokemonDetails(pokeName || "");
 
   useEffect(() => {
     if (data) {
       setGenera(
-        data.genera.find((item) => item.language.name === "en")?.genus || ""
+        data?.genera?.find((item) => item.language.name === "en")?.genus || ""
       );
     }
   }, [data]);
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: [api.pokemon_data] });
+    queryClient.invalidateQueries({ queryKey: [api.pokemon_extended_data] });
   }, [list, list?.name, queryClient]);
 
   if (isLoading || !list) {
@@ -189,6 +191,7 @@ const PokeCardExpanded = ({ list }: Props) => {
           {list.abilities.map((ability, index) => {
             return (
               <CapsuleText
+                key={ability.slot}
                 text={ability.ability.name}
                 outline={index === 0 ? "#a9aecd" : "#8a4444"}
               />

@@ -1,4 +1,4 @@
-import { PokemonDetails } from "../hooks/useFetchPokemonList";
+import { PokemonDetails } from "../types";
 
 const hoverShowTypes = (
   types: PokemonDetails["types"],

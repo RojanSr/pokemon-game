@@ -1,47 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../shared/api";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { PaginationResponse } from "../../shared/types/global";
-import { PokemonType, StatNames } from "../../shared/constants";
+import { PokemonDetails } from "../types";
+import { reponseErrorHandler, ResponseData } from "../../shared/utils/helper";
 
 interface PokemonListRes {
   name: string;
   url: string;
-}
-
-export interface PokemonDetails {
-  abilities: { ability: { name: string }; slot: number }[];
-  cries: {
-    latest: string;
-    legacy: string;
-  };
-  height: number;
-  id: number;
-  moves: {
-    move: {
-      name: string;
-      url: string;
-    };
-  }[];
-  name: string;
-  sprites: {
-    front_default: string;
-    other: {
-      showdown: {
-        front_default: string;
-      };
-    };
-  };
-  weight: number;
-  types: {
-    slot: number;
-    type: {
-      name: PokemonType;
-      url: string;
-    };
-  }[];
-  base_experience: number;
-  stats: { base_stat: number; stat: { name: StatNames } }[];
 }
 
 const fetchPokemonDetails = async (url: string) => {
@@ -53,44 +19,55 @@ const fetchPokemonDetails = async (url: string) => {
   }
 };
 
-const fetchPokemonList = async () => {
+const fetchPokemonList = async ({ searchQuery }: { searchQuery?: string }) => {
   try {
-    const response = await axios.get<PaginationResponse<PokemonListRes[]>>(
-      api.pokemon_list
-    );
-    const pokemonList = await Promise.all(
-      response.data.results.map(async (pokemon) => {
-        const res = await fetchPokemonDetails(pokemon.url);
-        return {
-          cries: res?.data?.cries || { latest: "", legacy: "" }, // Provide default values
-          sprites: res?.data?.sprites || {
-            front_default: "",
-            other: { showdown: { front_default: "" } },
-          },
-          height: res?.data?.height,
-          id: res?.data?.id,
-          moves: res?.data?.moves || [],
-          weight: res?.data?.weight,
-          name: res?.data?.name,
-          types: res?.data?.types,
-          base_experience: res?.data?.base_experience,
-          abilities: res?.data?.abilities,
-          stats: res?.data?.stats,
-        } as PokemonDetails;
-      })
-    );
-    return pokemonList;
+    if (searchQuery) {
+      const response = await axios.get<PokemonDetails>(
+        `${api.pokemon_data}/${searchQuery.toLowerCase()}`
+      );
+      return [response.data];
+    } else {
+      const response = await axios.get<PaginationResponse<PokemonListRes[]>>(
+        api.pokemon_list
+      );
+      const pokemonList = await Promise.all(
+        response.data.results.map(async (pokemon) => {
+          const res = await fetchPokemonDetails(pokemon.url);
+          return {
+            cries: res?.data?.cries || { latest: "", legacy: "" }, // Provide default values
+            sprites: res?.data?.sprites || {
+              front_default: "",
+              other: { showdown: { front_default: "" } },
+            },
+            height: res?.data?.height,
+            id: res?.data?.id,
+            moves: res?.data?.moves || [],
+            weight: res?.data?.weight,
+            name: res?.data?.name,
+            types: res?.data?.types,
+            base_experience: res?.data?.base_experience,
+            abilities: res?.data?.abilities,
+            stats: res?.data?.stats,
+          } as PokemonDetails;
+        })
+      );
+      return pokemonList;
+    }
   } catch (err) {
-    console.error(err);
-    throw new Error("Failed to fetch Pokémon list"); // Throw an error for better error handling
+    reponseErrorHandler(err as AxiosError<ResponseData, unknown>);
+    return [];
   }
 };
 
-const useFetchPokemonList = () => {
+const useFetchPokemonList = ({ searchQuery }: { searchQuery?: string }) => {
   return useQuery({
-    queryKey: [api.pokemon_list],
-    queryFn: fetchPokemonList,
-    select: (data) => data,
+    queryKey: [api.pokemon_list, api.pokemon_data],
+    queryFn: () => fetchPokemonList({ searchQuery: searchQuery }),
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: 1,
+    retryDelay: 3000,
   });
 };
 

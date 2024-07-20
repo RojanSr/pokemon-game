@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { Box, Center, Flex, Stack, Text, Tooltip } from "@chakra-ui/react";
-import { PokemonDetails } from "../hooks/useFetchPokemonList";
-import PokeTypeBadge from "../../shared/components/PokeTypeBadge";
-import hoverShowTypes from "../utils/hoverShowTypes";
-import { noOfBadgesToShow } from "../../shared/constants";
-import { usePokeStore } from "../../shared/store/pokemonStore";
+import { usePokeStore } from "../../../shared/store/pokemonStore";
+import { noOfBadgesToShow } from "../../../shared/constants";
+import PokeTypeBadge from "../../../shared/components/PokeTypeBadge";
+import hoverShowTypes from "../../utils/hoverShowTypes";
+import { PokemonDetails } from "../../types";
 
 interface Props {
   name: string;
@@ -26,22 +26,25 @@ const PokeCard = ({ name, image, types, id }: Props) => {
       boxShadow={"0 4px 8px rgba(0, 0, 0, 0.05)"}
       maxW={"260px"}
       cursor={"pointer"}
-      outline={selectedID === id ? "3px solid lightgreen" : ""}
+      outline={selectedID === id ? "3px solid #de3b5e" : ""}
       transition={"0.05s ease-in-out"}
     >
       <Box
         w={"80px"}
         h={"80px"}
         position={"absolute"}
-        top={"-25%"}
+        top={"-28%"}
         left={"50%"}
         right={"50%"}
-        transform={"translateX(-50%)"}
+        transform={
+          selectedID === id ? "translateX(-50%) scale(1.3)" : "translateX(-50%)"
+        }
         bgImage={image}
         bgRepeat={"no-repeat"}
         bgPosition={"center"}
         bgSize={"cover"}
         zIndex={2}
+        transition={"0.2s ease-in-out"}
       ></Box>
       <Stack mt={6} alignItems={"center"}>
         <Text color={"text.grey"} fontWeight={"600"} fontSize={"12px"}>
