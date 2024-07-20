@@ -14,6 +14,7 @@ import NewsActive from "../assets/active/news.svg";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../routes/constants";
+import { usePokeStore } from "../store/pokemonStore";
 interface NavItem {
   icon: { active: string; inactive: string };
   name: string;
@@ -56,12 +57,14 @@ const navItems: NavItem[] = [
 const Navbar = () => {
   const [active, setActive] = useState<string>("/");
   const location = window.location.href;
+  const clearPokeStore = usePokeStore((store) => store.clearPokeStore);
 
   useEffect(() => {
     if (location.split("/")[3]) {
       setActive(`/${location.split("/")[3]}`.toLowerCase());
+      clearPokeStore();
     }
-  }, [location]);
+  }, [location, clearPokeStore]);
 
   return (
     <Flex
@@ -72,14 +75,14 @@ const Navbar = () => {
       fontSize={"14px"}
       px={8}
       mt={6}
+      mb={10}
       boxShadow={"2px 2px 10px 0px rgba(0,0,0,0.1)"}
       justifyContent={"space-between"}
     >
       {navItems.map((nav) => {
         return (
-          <Link to={nav.to || ""}>
+          <Link to={nav.to || ""} key={nav.to}>
             <Flex
-              key={nav.to}
               alignItems="center"
               onClick={() => setActive(nav.to)}
               gap={2}

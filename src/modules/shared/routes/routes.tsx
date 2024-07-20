@@ -4,6 +4,7 @@ import Home from "../../home";
 import Pokedex from "../../pokedex";
 import Layout from "../layout";
 import PokeNews from "../../news";
+import ErrorPage from "../../../error-page";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ export const router = createBrowserRouter([
         <Outlet />
       </Layout>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: routes.home,
