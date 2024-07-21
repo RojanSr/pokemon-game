@@ -13,6 +13,10 @@ export const theme = extendTheme({
     primary: {
       red: "#ff5350",
     },
+    white: {
+      ghost: "#f4f6f9",
+      ghost_hover: " #eff2f6",
+    },
     text: {
       dark: "#061833",
       grey: "#9e9fa1",

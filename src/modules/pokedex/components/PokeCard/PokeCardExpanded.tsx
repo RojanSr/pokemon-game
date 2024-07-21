@@ -51,7 +51,7 @@ const PokeCardExpanded = ({ list }: Props) => {
   if (isLoading || !list) {
     return (
       <Center w={"300px"} h={"100%"}>
-        <Spinner />;
+        <Spinner />
       </Center>
     );
   }

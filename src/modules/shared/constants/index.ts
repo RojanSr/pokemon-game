@@ -1,3 +1,5 @@
+import { PaginationOptions } from "../types/global";
+
 export type PokemonType =
   | "grass"
   | "poison"
@@ -38,3 +40,10 @@ export type StatNames =
   | "special-defense"
   | "speed"
   | "tot";
+
+export type PageSize = 6 | 9 | 12 | 20 | 30;
+
+export const defaultPagination: PaginationOptions = {
+  limit: 9,
+  offset: 0,
+};
