@@ -1,7 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../shared/api";
 import axios, { AxiosError } from "axios";
-import { PaginationResponse } from "../../shared/types/global";
+import {
+  PaginationOptions,
+  PaginationResponse,
+} from "../../shared/types/global";
 import { PokemonDetails } from "../types";
 import { reponseErrorHandler, ResponseData } from "../../shared/utils/helper";
 
@@ -19,16 +22,27 @@ const fetchPokemonDetails = async (url: string) => {
   }
 };
 
-const fetchPokemonList = async ({ searchQuery }: { searchQuery?: string }) => {
+const fetchPokemonList = async ({
+  searchQuery,
+  pagination,
+}: {
+  searchQuery?: string;
+  pagination: PaginationOptions;
+}) => {
   try {
     if (searchQuery) {
       const response = await axios.get<PokemonDetails>(
         `${api.pokemon_data}/${searchQuery.toLowerCase()}`
       );
-      return [response.data];
+      const finalResponse: PaginationResponse<PokemonDetails[]> = {
+        count: 1,
+        results: [response.data],
+      };
+
+      return finalResponse;
     } else {
       const response = await axios.get<PaginationResponse<PokemonListRes[]>>(
-        api.pokemon_list
+        `${api.pokemon_data}?limit=${pagination.limit}&offset=${pagination.offset}`
       );
       const pokemonList = await Promise.all(
         response.data.results.map(async (pokemon) => {
@@ -51,19 +65,34 @@ const fetchPokemonList = async ({ searchQuery }: { searchQuery?: string }) => {
           } as PokemonDetails;
         })
       );
-      return pokemonList;
+
+      const finalResponse: PaginationResponse<PokemonDetails[]> = {
+        count: response.data.count,
+        results: pokemonList,
+      };
+
+      return finalResponse;
     }
   } catch (err) {
     reponseErrorHandler(err as AxiosError<ResponseData, unknown>);
-    return [];
+    return {
+      count: 0,
+      results: [],
+    };
   }
 };
 
-const useFetchPokemonList = ({ searchQuery }: { searchQuery?: string }) => {
+const useFetchPokemonList = ({
+  searchQuery,
+  pagination,
+}: {
+  searchQuery?: string;
+  pagination: PaginationOptions;
+}) => {
   return useQuery({
-    queryKey: [api.pokemon_list, api.pokemon_data],
-    queryFn: () => fetchPokemonList({ searchQuery: searchQuery }),
-    staleTime: Infinity,
+    queryKey: [api.pokemon_data, pagination],
+    queryFn: () => fetchPokemonList({ searchQuery, pagination }),
+    // staleTime: 0,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     retry: 1,
