@@ -32,7 +32,7 @@ const fetchPokemonList = async ({
   try {
     if (searchQuery) {
       const response = await axios.get<PokemonDetails>(
-        `${api.pokemon_data}/${searchQuery.toLowerCase()}`
+        `${api.pokedex.pokemon_data}/${searchQuery.toLowerCase()}`
       );
       const finalResponse: PaginationResponse<PokemonDetails[]> = {
         count: 1,
@@ -42,7 +42,7 @@ const fetchPokemonList = async ({
       return finalResponse;
     } else {
       const response = await axios.get<PaginationResponse<PokemonListRes[]>>(
-        `${api.pokemon_data}?limit=${pagination.limit}&offset=${pagination.offset}`
+        `${api.pokedex.pokemon_data}?limit=${pagination.limit}&offset=${pagination.offset}`
       );
       const pokemonList = await Promise.all(
         response.data.results.map(async (pokemon) => {
@@ -90,7 +90,7 @@ const useFetchPokemonList = ({
   pagination: PaginationOptions;
 }) => {
   return useQuery({
-    queryKey: [api.pokemon_data, pagination],
+    queryKey: [api.pokedex.pokemon_data, pagination],
     queryFn: () => fetchPokemonList({ searchQuery, pagination }),
     // staleTime: 0,
     refetchOnWindowFocus: false,

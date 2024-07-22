@@ -45,7 +45,9 @@ const PokeCardExpanded = ({ list }: Props) => {
   }, [data]);
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: [api.pokemon_extended_data] });
+    queryClient.invalidateQueries({
+      queryKey: [api.pokedex.pokemon_extended_data],
+    });
   }, [list, list?.name, queryClient]);
 
   if (isLoading || !list) {
