@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const fetchPokemon = async (name: string) => {
   try {
     const response = await axios.get<PokemonDetails>(
-      `${api.pokemon_data}/${name}`
+      `${api.pokedex.pokemon_data}/${name}`
     );
     return response;
   } catch (err) {
@@ -17,7 +17,7 @@ const fetchPokemon = async (name: string) => {
 
 const useFetchPokemon = (name: string) => {
   return useQuery({
-    queryKey: [api.pokemon_data],
+    queryKey: [api.pokedex.pokemon_data],
     queryFn: () => fetchPokemon(name),
     select: (data) => data?.data,
     enabled: !!name,

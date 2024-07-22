@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 
 export interface ResponseData {
   errors?: { [key: string]: string[] };
+  code?: string;
   message: string;
 }
 
@@ -18,5 +19,15 @@ export const reponseErrorHandler = (res: AxiosError<ResponseData>) => {
       duration: 2000,
       isClosable: true,
     });
+  } else {
+    toast({
+      title: res?.response?.data?.message,
+      description: res?.response?.data?.code || "",
+      position: "top",
+      status: "error",
+      duration: 2000,
+      isClosable: true,
+    });
   }
+  console.log(res);
 };

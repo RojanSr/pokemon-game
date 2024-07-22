@@ -15,7 +15,7 @@ const fetchExtendedDetails = async (pokemonName: string) => {
   if (!pokemonName) return;
   try {
     const response = await axios.get<PokemonSpeciesResponse>(
-      `${api.pokemon_extended_data}/${pokemonName}`
+      `${api.pokedex.pokemon_extended_data}/${pokemonName}`
     );
     return response;
   } catch (err) {
@@ -26,7 +26,7 @@ const fetchExtendedDetails = async (pokemonName: string) => {
 
 const useFetchExtendedDetails = (pokemonName: string) => {
   return useQuery({
-    queryKey: [api.pokemon_extended_data],
+    queryKey: [api.pokedex.pokemon_extended_data],
     queryFn: () => fetchExtendedDetails(pokemonName),
     select: (data) => data?.data,
     enabled: !!pokemonName,

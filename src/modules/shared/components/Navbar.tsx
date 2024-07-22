@@ -7,8 +7,6 @@ import ControllerInactive from "../assets/inactive/controller.svg";
 import ControllerActive from "../assets/active/controller.svg";
 import TelevisionInactive from "../assets/inactive/television.svg";
 import TelevisionActive from "../assets/active/television.svg";
-import PlayInactive from "../assets/inactive/play.svg";
-import PlayActive from "../assets/active/play.svg";
 import NewsInactive from "../assets/inactive/news.svg";
 import NewsActive from "../assets/active/news.svg";
 import { useEffect, useState } from "react";
@@ -43,11 +41,6 @@ const navItems: NavItem[] = [
     to: routes.tv,
   },
   {
-    icon: { active: PlayActive, inactive: PlayInactive },
-    name: "Play Pokemon",
-    to: routes.play,
-  },
-  {
     icon: { active: NewsActive, inactive: NewsInactive },
     name: "News",
     to: routes.news,
@@ -73,7 +66,7 @@ const Navbar = () => {
       borderRadius={"22px"}
       fontWeight={"600"}
       fontSize={"14px"}
-      px={8}
+      px={"100px"}
       mt={6}
       mb={10}
       boxShadow={"2px 2px 10px 0px rgba(0,0,0,0.1)"}

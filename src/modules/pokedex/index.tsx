@@ -34,7 +34,7 @@ const Pokedex = () => {
   useEffect(() => {
     if (searchQuery) {
       queryClient.invalidateQueries({
-        queryKey: [api.pokemon_data],
+        queryKey: [api.pokedex.pokemon_data],
       });
     }
   }, [searchQuery, queryClient]);
