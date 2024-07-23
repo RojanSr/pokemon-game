@@ -210,7 +210,7 @@ const PokeCardExpanded = ({ list }: Props) => {
           </GridItem>
           <GridItem>
             <CapsuleText
-              text={`${list.weight.toString()}Kg`}
+              text={`${((list.weight || 0) / 10).toString()}Kg`}
               headerText="weight"
             />
           </GridItem>
