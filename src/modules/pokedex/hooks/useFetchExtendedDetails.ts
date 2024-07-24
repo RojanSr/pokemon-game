@@ -9,6 +9,7 @@ interface PokemonSpeciesResponse {
   flavor_text_entries: { flavor_text: string; language: { name: string } }[];
   growth_rate: PokemonGrowthRate;
   genera: { genus: string; language: { name: string } }[]; // Species of Pokemon
+  is_legendary: boolean;
 }
 
 const fetchExtendedDetails = async (pokemonName: string) => {

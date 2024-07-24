@@ -81,7 +81,11 @@ const PokeCardExpanded = ({ list }: Props) => {
         alignItems={"center"}
         flexDirection={"column"}
         borderRadius={"18px"}
-        boxShadow={"0 4px 8px rgba(0, 0, 0, 0.05)"}
+        boxShadow={
+          data?.is_legendary
+            ? "0 0px 10px rgba(255, 215, 0, 0.9)"
+            : "0 4px 8px rgba(0, 0, 0, 0.05)"
+        }
         w={"300px"}
         position={"relative"}
       >
