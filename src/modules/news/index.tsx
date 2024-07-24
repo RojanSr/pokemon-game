@@ -15,7 +15,7 @@ const PokeNews = () => {
 
   const { data, isLoading } = useFetchPokeNews(pagination);
   if (isLoading) {
-    <GlobalLoader />;
+    return <GlobalLoader />;
   }
   return (
     <>
