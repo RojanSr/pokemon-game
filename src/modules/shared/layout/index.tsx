@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <Box maxW={"1200px"} mx={"auto"}>
+    <Box mx={"auto"} px={"20px"} maxW={"1500px"}>
       <Navbar />
       {children}
     </Box>

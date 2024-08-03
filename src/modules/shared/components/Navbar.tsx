@@ -1,114 +1,164 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import PokeballActive from "../assets/active/pokeball.svg";
-import PokeballInactive from "../assets/inactive/pokeball.svg";
-import PokedexActive from "../assets/active/pokedex.svg";
+import {
+  Box,
+  Flex,
+  Image,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Tooltip,
+} from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
+import PrimaryLogo from "../assets/primary_logo.svg";
+import { Link, useLocation } from "react-router-dom";
+import { routes, RouteValues } from "../routes/constants";
+import { CgMenuGridO } from "react-icons/cg";
+import ToggleEffect from "./common/ToggleEffect";
+import { useEffect, useRef, useState } from "react";
 import PokedexInactive from "../assets/inactive/pokedex.svg";
 import ControllerInactive from "../assets/inactive/controller.svg";
-import ControllerActive from "../assets/active/controller.svg";
 import TelevisionInactive from "../assets/inactive/television.svg";
-import TelevisionActive from "../assets/active/television.svg";
 import NewsInactive from "../assets/inactive/news.svg";
-import NewsActive from "../assets/active/news.svg";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { routes } from "../routes/constants";
-import { usePokeStore } from "../store/pokemonStore";
+
 interface NavItem {
-  icon: { active: string; inactive: string };
+  id: number;
+  icon: string;
   name: string;
-  to: string;
+  to: RouteValues;
 }
 
 const navItems: NavItem[] = [
   {
-    icon: { active: PokeballActive, inactive: PokeballInactive },
-    name: "Home",
-    to: routes.home,
-  },
-  {
-    icon: { active: PokedexActive, inactive: PokedexInactive },
+    id: 2,
+    icon: PokedexInactive,
     name: "Pokedex",
     to: routes.pokedex,
   },
   {
-    icon: { active: ControllerActive, inactive: ControllerInactive },
+    id: 3,
+    icon: ControllerInactive,
     name: "Videogame",
     to: routes.videogame,
   },
   {
-    icon: { active: TelevisionActive, inactive: TelevisionInactive },
+    id: 4,
+    icon: TelevisionInactive,
     name: "TV Pokemon",
     to: routes.tv,
   },
   {
-    icon: { active: NewsActive, inactive: NewsInactive },
+    id: 5,
+    icon: NewsInactive,
     name: "News",
     to: routes.news,
   },
 ];
 
 const Navbar = () => {
-  const [active, setActive] = useState<string>("/");
-  const location = window.location.href;
-  const clearPokeStore = usePokeStore((store) => store.clearPokeStore);
+  const location = useLocation();
 
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [height, setHeight] = useState("0px");
+  const flexRef = useRef<HTMLDivElement>(null);
+
+  // Dynamically setting height of the menu
   useEffect(() => {
-    if (location.split("/")[3]) {
-      setActive(`/${location.split("/")[3]}`.toLowerCase());
-      clearPokeStore();
+    if (flexRef.current) {
+      setHeight(menuOpen ? `${flexRef.current.scrollHeight}px` : "0px");
     }
-  }, [location, clearPokeStore]);
+  }, [menuOpen]);
 
   return (
-    <Flex
-      color={"#767a7d"}
-      bg={"white"}
-      borderRadius={"22px"}
-      fontWeight={"600"}
-      fontSize={"14px"}
-      px={"100px"}
-      mt={6}
-      mb={10}
-      boxShadow={"2px 2px 10px 0px rgba(0,0,0,0.1)"}
-      justifyContent={"space-between"}
-    >
-      {navItems.map((nav) => {
-        return (
-          <Link to={nav.to || ""} key={nav.to}>
-            <Flex
-              alignItems="center"
-              onClick={() => setActive(nav.to)}
-              gap={2}
-              py={6}
-              position={"relative"}
+    <Flex py={5} justifyContent={"space-between"} gap={6}>
+      <Link to={routes.home}>
+        <Image src={PrimaryLogo} alt="Pokemon" h={"70px"} minW={"100px"} />
+      </Link>
+
+      <Flex alignItems={"center"} gap={{ sm: "10px", lg: "25px" }}>
+        <InputGroup size={"sm"}>
+          <Input
+            placeholder="Search"
+            bg={"white"}
+            w={{ base: "120px", md: "200px" }}
+            borderRadius={"30px"}
+            _placeholder={{ color: "black", opacity: 1 }}
+            _focus={{
+              width: { base: "130px", md: "230px" },
+              outline: "none",
+              boxShadow: "none",
+            }}
+            border={"none"}
+            transition={"ease-in-out 0.2s"}
+          />
+          <InputLeftElement
+            pointerEvents="none"
+            color="text.dark"
+            fontSize="1em"
+          >
+            <Search2Icon />
+          </InputLeftElement>
+        </InputGroup>
+
+        <Box position={"relative"}>
+          <ToggleEffect onClick={() => setMenuOpen((prev) => !prev)}>
+            <CgMenuGridO
+              color={location.pathname === "/" ? "white" : "black"}
+              fontSize={"35px"}
               cursor={"pointer"}
-              _after={{
-                content: "''",
-                position: "absolute",
-                bottom: 0,
-                width: "100%",
-                height: "4px",
-                backgroundColor: "primary.red",
-                borderRadius: "99px",
-                opacity: active === nav.to ? "1" : "0",
-                transition: "all 0.18s ease-in-out",
-              }}
-            >
-              <Box w={"32px"} h={"32px"}>
-                <Image
-                  src={active === nav.to ? nav.icon.active : nav.icon.inactive}
-                  w="100%"
-                  h="100%"
-                  objectFit={"cover"}
-                />
-              </Box>
-              <Text color={active === nav.to ? "primary.red" : "inherit"}>
-                {nav.name}
-              </Text>
-            </Flex>
-          </Link>
-        );
-      })}
+            />
+          </ToggleEffect>
+
+          <Flex
+            ref={flexRef}
+            height={height}
+            display={menuOpen ? "flex" : "none"}
+            flexDirection={"column"}
+            position={"absolute"}
+            bg={"white"}
+            transform={"translateX(-50%)"}
+            left={"50%"}
+            borderRadius={"12px"}
+            width={"50px"}
+            alignItems={"center"}
+            zIndex={1000}
+            transitionProperty={"display opacity"}
+            transitionDuration={"0.4s"}
+            // NOTE: Only works on chrome and safari
+            sx={{
+              transitionBehavior: "allow-discrete",
+            }}
+            boxShadow={"0 4px 8px rgba(0, 0, 0, 0.1)"}
+          >
+            {navItems.map((nav) => {
+              return (
+                <Box
+                  key={nav.id}
+                  opacity={menuOpen ? 1 : 0}
+                  transitionProperty={"opacity"}
+                  transitionDuration={"0.3s"}
+                  sx={{
+                    transitionBehavior: "allow-discrete",
+                  }}
+                  py={4}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setHeight("0");
+                  }}
+                >
+                  <Link to={nav.to}>
+                    <Tooltip
+                      label={nav.name}
+                      borderRadius={"12px"}
+                      fontSize={"14px"}
+                    >
+                      <Image src={nav.icon} w={6} h={6} />
+                    </Tooltip>
+                  </Link>
+                </Box>
+              );
+            })}
+          </Flex>
+        </Box>
+      </Flex>
     </Flex>
   );
 };

@@ -5,4 +5,6 @@ export const routes = {
   videogame: "/videogame",
   tv: "/tv",
   play: "/play",
-};
+} as const;
+
+export type RouteValues = (typeof routes)[keyof typeof routes];

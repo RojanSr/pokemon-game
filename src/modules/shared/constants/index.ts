@@ -41,9 +41,9 @@ export type StatNames =
   | "speed"
   | "tot";
 
-export type PageSize = 6 | 9 | 12 | 20 | 30;
+export type PageSize = 12 | 20 | 30;
 
 export const defaultPagination: PaginationOptions = {
-  limit: 9,
+  limit: 12,
   offset: 0,
 };
