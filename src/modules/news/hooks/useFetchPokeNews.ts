@@ -14,7 +14,7 @@ const fetchPokeNews = async (pagination: PaginationOptions) => {
 
   try {
     const response = await axios.get<GlobalResponseNews<ArticleDetails[]>>(
-      `${api.news.fetch_everything}?q=pokemon&pageSize=${pageInfo.page_size}&page=${pageInfo.page}&apiKey=${apiKey}`
+      `${api.news.fetch_everything}?q=pokemon+pikachu&pageSize=${pageInfo.page_size}&page=${pageInfo.page}&apiKey=${apiKey}`
     );
     return response;
   } catch (err) {

@@ -67,8 +67,8 @@ const Pokedex = () => {
             <Grid
               templateColumns={{
                 base: "repeat(2, 1fr)",
-                "2xl": "repeat(3, 1fr)",
-                lg: "repeat(3, 1fr)",
+                "2xl": "repeat(4, 1fr)",
+                lg: "repeat(4, 1fr)",
               }}
               columnGap={6}
               rowGap={12}

@@ -47,8 +47,6 @@ const Pagination = ({
           onChange={(e) => onLimitChange(parseInt(e.target.value) as PageSize)}
           fontSize={"12px"}
         >
-          <option value={6}>6</option>
-          <option value={9}>9</option>
           <option value={12}>12</option>
           <option value={20}>20</option>
           <option value={30}>30</option>
