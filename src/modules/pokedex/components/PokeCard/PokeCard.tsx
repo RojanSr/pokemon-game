@@ -1,10 +1,7 @@
-import { Fragment } from "react";
-import { Box, Center, Flex, Stack, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { usePokeStore } from "../../../shared/store/pokemonStore";
-import { noOfBadgesToShow } from "../../../shared/constants";
-import PokeTypeBadge from "../../../shared/components/PokeTypeBadge";
-import hoverShowTypes from "../../utils/hoverShowTypes";
 import { PokemonDetails } from "../../types";
+import PokeTypeBadges from "../PokeTypeBadges/PokeTypeBadges";
 
 interface Props {
   name: string;
@@ -54,31 +51,7 @@ const PokeCard = ({ name, image, types, id }: Props) => {
         <Text fontWeight={"700"} textTransform={"capitalize"}>
           {name}
         </Text>
-        <Flex gap={2}>
-          {types.map((el, index) => {
-            // Render Number of Badges
-            if (index < noOfBadgesToShow) {
-              return (
-                <Fragment key={el.slot.toString()}>
-                  <PokeTypeBadge type={el} />
-                </Fragment>
-              );
-            }
-          })}
-          {noOfBadgesToShow < types.length && noOfBadgesToShow > 0 && (
-            <Tooltip label={hoverShowTypes(types, noOfBadgesToShow)}>
-              <Center
-                bg={"rgba(0, 0, 0, 0.2)"}
-                px={2}
-                borderRadius={"8px"}
-                fontSize={"14px"}
-                fontWeight={"600"}
-              >
-                +{types.length - 1}
-              </Center>
-            </Tooltip>
-          )}
-        </Flex>
+        <PokeTypeBadges types={types} />
       </Stack>
     </Flex>
   );
