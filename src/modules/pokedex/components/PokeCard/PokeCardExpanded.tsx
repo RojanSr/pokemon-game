@@ -16,11 +16,11 @@ import { IoMdVolumeHigh } from "react-icons/io";
 import useFetchPokemonDetails from "../../hooks/useFetchExtendedDetails";
 import { api } from "../../../shared/api";
 import { noOfBadgesToShow } from "../../../shared/constants";
-import PokeTypeBadge from "../../../shared/components/PokeTypeBadge";
 import hoverShowTypes from "../../utils/hoverShowTypes";
 import CapsuleText from "../../../shared/components/common/CapsuleText";
 import PokeStats from "../PokeStats";
 import { PokemonDetails } from "../../types";
+import TypeBadge from "../PokeTypeBadges/TypeBadge";
 
 interface Props {
   list: PokemonDetails | undefined;
@@ -146,7 +146,7 @@ const PokeCardExpanded = ({ list }: Props) => {
             if (index < noOfBadgesToShow) {
               return (
                 <Fragment key={el.slot.toString()}>
-                  <PokeTypeBadge type={el} />
+                  <TypeBadge type={el} />
                 </Fragment>
               );
             }

@@ -1,12 +1,12 @@
 import { Box, Text } from "@chakra-ui/react";
-import getBadgeColor from "../utils/getBadgeColor";
-import { PokemonDetails } from "../../pokedex/types";
+import getBadgeColor from "../../../shared/utils/getBadgeColor";
+import { PokemonDetails } from "../../types";
 
-interface Props {
+interface TypeBadgeProps {
   type: PokemonDetails["types"][0];
 }
 
-const PokeTypeBadge = ({ type }: Props) => {
+const TypeBadge = ({ type }: TypeBadgeProps) => {
   return (
     <Box
       display={"flex"}
@@ -26,4 +26,4 @@ const PokeTypeBadge = ({ type }: Props) => {
   );
 };
 
-export default PokeTypeBadge;
+export default TypeBadge;
