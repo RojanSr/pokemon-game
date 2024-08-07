@@ -1,8 +1,8 @@
 import { Center, Flex, Text } from "@chakra-ui/react";
-import abbreviateStat from "../utils/abbreviateStat";
-import { StatNames } from "../../shared/constants";
-import getStatColor from "../utils/getStatsColor";
-import { PokemonDetails } from "../types";
+import { PokemonDetails } from "@pokedex/types";
+import abbreviateStat from "@pokedex/utils/abbreviateStat";
+import getStatColor from "@pokedex/utils/getStatsColor";
+import { StatNames } from "@shared/constants";
 
 const StatIcon = ({
   stat_name,

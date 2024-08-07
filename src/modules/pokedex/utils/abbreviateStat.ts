@@ -1,4 +1,4 @@
-import { StatNames } from "../../shared/constants";
+import { StatNames } from "@shared/constants";
 
 const abbreviateStat = (stat: StatNames) => {
   switch (stat) {

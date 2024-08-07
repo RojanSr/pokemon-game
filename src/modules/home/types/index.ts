@@ -1,4 +1,4 @@
-import { RouteValues } from "../../shared/routes/constants";
+import { RouteValues } from "@shared/routes/constants";
 
 export type Slide = {
   id: number;

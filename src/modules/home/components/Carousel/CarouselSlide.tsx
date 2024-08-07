@@ -1,7 +1,7 @@
 import { Box, Button, Grid, GridItem, Image, Text } from "@chakra-ui/react";
-import { Slide } from "../../types";
-import ToggleEffect from "../../../shared/components/common/ToggleEffect";
 import { Link } from "react-router-dom";
+import ToggleEffect from "@shared/components/common/ToggleEffect";
+import { Slide } from "@home/types";
 
 interface CarouselSlideProps {
   panel: Slide;

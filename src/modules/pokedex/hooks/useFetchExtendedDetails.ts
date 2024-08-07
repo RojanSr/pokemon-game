@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
-import { api } from "../../shared/api";
 import { useQuery } from "@tanstack/react-query";
-import { PokemonGrowthRate } from "../../shared/constants";
-import { reponseErrorHandler, ResponseData } from "../../shared/utils/helper";
+import { PokemonGrowthRate } from "@shared/constants";
+import { api } from "@shared/api";
+import { reponseErrorHandler, ResponseData } from "@shared/utils/helper";
 
 interface PokemonSpeciesResponse {
   evolves_from_species: { name: string };

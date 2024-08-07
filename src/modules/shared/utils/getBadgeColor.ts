@@ -1,4 +1,4 @@
-import { PokemonType } from "../constants";
+import { PokemonType } from "@shared/constants";
 
 const getBadgeColor = (type: PokemonType): string => {
   switch (type) {

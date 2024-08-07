@@ -1,4 +1,4 @@
-import { PokemonType, StatNames } from "../../shared/constants";
+import { PokemonType, StatNames } from "@shared/constants";
 
 export interface PokemonDetails {
   abilities: { ability: { name: string }; slot: number }[];

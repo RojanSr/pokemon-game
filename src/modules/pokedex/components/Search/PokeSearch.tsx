@@ -1,5 +1,5 @@
 import { Button, Flex, Image, Input } from "@chakra-ui/react";
-import PokeBall from "../../../shared/assets/pokeball.svg";
+import PokeBall from "@shared/assets/pokeball.svg";
 import { Controller, useForm } from "react-hook-form";
 
 export interface PokemonSearchField {

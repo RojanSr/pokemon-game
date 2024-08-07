@@ -5,7 +5,7 @@ import Pokedex from "../../pokedex";
 import Layout from "../layout";
 import PokeNews from "../../news";
 import ErrorPage from "../../../error-page";
-import VideoGames from "../../videogame";
+import VideoGames from "../../play";
 import PokeTV from "../../tv";
 
 export const router = createBrowserRouter([

@@ -1,11 +1,11 @@
 import { Box, Flex } from "@chakra-ui/react";
 import NewsCard from "./components/NewsCard";
 import useFetchPokeNews from "./hooks/useFetchPokeNews";
-import GlobalLoader from "../shared/components/common/GlobalLoader";
 import { useState } from "react";
-import Pagination from "../shared/components/common/Pagination";
-import { PaginationOptions } from "../shared/types/global";
-import { defaultPagination } from "../shared/constants";
+import { defaultPagination } from "@shared/constants";
+import { PaginationOptions } from "@shared/types/global";
+import Pagination from "@shared/components/common/Pagination";
+import GlobalLoader from "@shared/components/common/GlobalLoader";
 
 const PokeNews = () => {
   const [pagination, setPagination] = useState<PaginationOptions>({

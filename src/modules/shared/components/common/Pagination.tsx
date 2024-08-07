@@ -1,8 +1,8 @@
 import { Flex, IconButton, Select, Text } from "@chakra-ui/react";
+import { PageSize } from "@shared/constants";
+import { getShowingPages } from "@shared/utils/getShowingPages";
 import { FaAngleLeft } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
-import { getShowingPages } from "../../utils/getShowingPages";
-import { PageSize } from "../../constants";
 
 interface Props {
   offset: number;

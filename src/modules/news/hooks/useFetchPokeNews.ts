@@ -1,10 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { api } from "../../shared/api";
-import { reponseErrorHandler, ResponseData } from "../../shared/utils/helper";
 import { useQuery } from "@tanstack/react-query";
-import { PaginationOptions } from "../../shared/types/global";
-import convertLimitOffset from "../../shared/utils/convertLimitOffset";
-import { ArticleDetails, GlobalResponseNews } from "../types";
+import { PaginationOptions } from "@shared/types/global";
+import convertLimitOffset from "@shared/utils/convertLimitOffset";
+import { ArticleDetails, GlobalResponseNews } from "@news/types";
+import { reponseErrorHandler, ResponseData } from "@shared/utils/helper";
+import { api } from "@shared/api";
 
 const apiKey = import.meta.env.VITE_NEWS_API_KEY;
 

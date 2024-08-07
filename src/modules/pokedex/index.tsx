@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Box, Center, Grid, GridItem, Spinner } from "@chakra-ui/react";
 import useFetchPokemonList from "./hooks/useFetchPokemonList";
-import { usePokeStore } from "../shared/store/pokemonStore";
 import PokeCard from "./components/PokeCard/PokeCard";
 import PokeCardExpanded from "./components/PokeCard/PokeCardExpanded";
 import PokeSearch, { PokemonSearchField } from "./components/Search/PokeSearch";
 import { PokemonDetails } from "./types";
 import { useQueryClient } from "@tanstack/react-query";
-import { api } from "../shared/api";
-import Pagination from "../shared/components/common/Pagination";
-import { PaginationOptions } from "../shared/types/global";
-import { defaultPagination } from "../shared/constants";
+import { usePokeStore } from "@shared/store/pokemonStore";
+import { PaginationOptions } from "@shared/types/global";
+import { defaultPagination } from "@shared/constants";
+import { api } from "@shared/api";
+import Pagination from "@shared/components/common/Pagination";
 
 const Pokedex = () => {
   const queryClient = useQueryClient();

@@ -1,6 +1,6 @@
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
-import { usePokeStore } from "../../../shared/store/pokemonStore";
-import { PokemonDetails } from "../../types";
+import { PokemonDetails } from "@pokedex/types";
+import { usePokeStore } from "@shared/store/pokemonStore";
 import PokeTypeBadges from "../PokeTypeBadges/PokeTypeBadges";
 
 interface Props {
