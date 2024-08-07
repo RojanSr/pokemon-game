@@ -10,7 +10,6 @@ import {
 import { Search2Icon } from "@chakra-ui/icons";
 import PrimaryLogo from "../assets/primary_logo.svg";
 import { Link, useLocation } from "react-router-dom";
-import { routes, RouteValues } from "../routes/constants";
 import { CgMenuGridO } from "react-icons/cg";
 import ToggleEffect from "./common/ToggleEffect";
 import { useEffect, useRef, useState } from "react";
@@ -18,6 +17,7 @@ import PokedexInactive from "../assets/inactive/pokedex.svg";
 import ControllerInactive from "../assets/inactive/controller.svg";
 import TelevisionInactive from "../assets/inactive/television.svg";
 import NewsInactive from "../assets/inactive/news.svg";
+import { routes, RouteValues } from "@shared/routes/constants";
 
 interface NavItem {
   id: number;

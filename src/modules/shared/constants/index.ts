@@ -1,4 +1,4 @@
-import { PaginationOptions } from "../types/global";
+import { PaginationOptions } from "@shared/types/global";
 
 export type PokemonType =
   | "grass"

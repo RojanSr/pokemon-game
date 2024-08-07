@@ -1,4 +1,4 @@
-import { PageSize } from "../constants";
+import { PageSize } from "@shared/constants";
 
 export interface PaginationResponse<T> {
   count: number;

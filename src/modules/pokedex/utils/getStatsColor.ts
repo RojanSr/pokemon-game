@@ -1,4 +1,4 @@
-import { StatNames } from "../../shared/constants";
+import { StatNames } from "@shared/constants";
 
 const getStatColor = (stat: StatNames) => {
   switch (stat) {

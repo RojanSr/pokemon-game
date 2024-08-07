@@ -21,7 +21,17 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Paths */
+    "paths": {
+      "@home/*": ["./src/modules/home/*"],
+      "@shared/*": ["./src/modules/shared/*"],
+      "@news/*": ["./src/modules/news/*"],
+      "@pokedex/*": ["./src/modules/pokedex/*"],
+      "@tv/*": ["./src/modules/tv/*"],
+      "@play/*": ["./src/modules/play/*"],
+    }
   },
   "include": ["src"]
 }

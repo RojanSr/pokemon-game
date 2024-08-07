@@ -14,13 +14,13 @@ import { useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { IoMdVolumeHigh } from "react-icons/io";
 import useFetchPokemonDetails from "../../hooks/useFetchExtendedDetails";
-import { api } from "../../../shared/api";
-import { noOfBadgesToShow } from "../../../shared/constants";
-import hoverShowTypes from "../../utils/hoverShowTypes";
-import CapsuleText from "../../../shared/components/common/CapsuleText";
 import PokeStats from "../PokeStats";
-import { PokemonDetails } from "../../types";
 import TypeBadge from "../PokeTypeBadges/TypeBadge";
+import { api } from "@shared/api";
+import { PokemonDetails } from "@pokedex/types";
+import { noOfBadgesToShow } from "@shared/constants";
+import hoverShowTypes from "@pokedex/utils/hoverShowTypes";
+import CapsuleText from "@shared/components/common/CapsuleText";
 
 interface Props {
   list: PokemonDetails | undefined;

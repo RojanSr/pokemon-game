@@ -1,7 +1,7 @@
 import { Box, Flex, Image, Text, Tooltip } from "@chakra-ui/react";
-import { ArticleDetails } from "../types";
+import { ArticleDetails } from "@news/types";
+import timeAgo from "@shared/utils/timeAgo";
 import { Link } from "react-router-dom";
-import timeAgo from "../../shared/utils/timeAgo";
 
 interface NewsCardProps {
   post: ArticleDetails;

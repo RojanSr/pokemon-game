@@ -1,7 +1,7 @@
 import axios from "axios";
-import { api } from "../../shared/api";
-import { PokemonDetails } from "../types";
 import { useQuery } from "@tanstack/react-query";
+import { api } from "@shared/api";
+import { PokemonDetails } from "@pokedex/types";
 
 const fetchPokemon = async (name: string) => {
   try {

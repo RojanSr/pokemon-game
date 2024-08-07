@@ -1,4 +1,4 @@
-import { PokemonDetails } from "../types";
+import { PokemonDetails } from "@pokedex/types";
 
 const hoverShowTypes = (
   types: PokemonDetails["types"],

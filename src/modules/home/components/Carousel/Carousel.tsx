@@ -1,13 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { Slide } from "../../types";
+import { Slide } from "@home/types";
 import CarouselSlide from "./CarouselSlide";
 
 interface CarouselProps {
   slides: Slide[];
+  intervalMS: number;
 }
 
-const Carousel = ({ slides }: CarouselProps) => {
+const Carousel = ({ slides, intervalMS }: CarouselProps) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -15,10 +16,10 @@ const Carousel = ({ slides }: CarouselProps) => {
       setActiveSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
     };
 
-    const interval = setInterval(switchSlides, 5000);
+    const interval = setInterval(switchSlides, intervalMS);
 
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [slides.length, intervalMS]);
 
   return (
     <Box position={"relative"}>

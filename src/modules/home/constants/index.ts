@@ -1,6 +1,6 @@
-import { Slide } from "../types";
-import Charizard3D from "../assets/charizard3d.png";
-import Silohuette from "../assets/silohuette.png";
+import Charizard3D from "@home/assets/charizard3d.png";
+import Silohuette from "@home/assets/silohuette.png";
+import { Slide } from "@home/types";
 
 export const CAROUSEL_SLIDES: Slide[] = [
   {

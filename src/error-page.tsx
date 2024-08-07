@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import { useRouteError } from "react-router-dom";
-import LottieAnimation from "./modules/shared/components/LottieAnimation";
-import errorAnimation from "./modules/shared/assets/lottie/lottieErrorAnimation.json";
+import errorAnimation from "@shared/assets/lottie/lottieErrorAnimation.json";
+import LottieAnimation from "@shared/components/LottieAnimation";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -25,7 +25,7 @@ export default function ErrorPage() {
     >
       <Box w={"200px"} h={"200px"} mb={"50px"}>
         <LottieAnimation animationJSON={errorAnimation} />
-      </Box>{" "}
+      </Box>
       <Text fontSize={"22px"} fontWeight={"600"}>
         Oops!
       </Text>

@@ -1,12 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "../../shared/api";
 import axios, { AxiosError } from "axios";
-import {
-  PaginationOptions,
-  PaginationResponse,
-} from "../../shared/types/global";
-import { PokemonDetails } from "../types";
-import { reponseErrorHandler, ResponseData } from "../../shared/utils/helper";
+import { PaginationOptions, PaginationResponse } from "@shared/types/global";
+import { api } from "@shared/api";
+import { reponseErrorHandler, ResponseData } from "@shared/utils/helper";
+import { PokemonDetails } from "@pokedex/types";
 
 interface PokemonListRes {
   name: string;

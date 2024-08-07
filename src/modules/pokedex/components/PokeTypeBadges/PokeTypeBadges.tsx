@@ -1,9 +1,9 @@
 import { Center, Flex, Tooltip } from "@chakra-ui/react";
 import { PokemonDetails } from "../../types";
-import { noOfBadgesToShow } from "../../../shared/constants";
 import { Fragment } from "react";
-import hoverShowTypes from "../../utils/hoverShowTypes";
 import TypeBadge from "./TypeBadge";
+import { noOfBadgesToShow } from "@shared/constants";
+import hoverShowTypes from "@pokedex/utils/hoverShowTypes";
 
 type PokeTypeBadgesProps = {
   types: PokemonDetails["types"];
