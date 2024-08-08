@@ -4,17 +4,6 @@ import { Slide } from "@home/types";
 
 export const CAROUSEL_SLIDES: Slide[] = [
   {
-    id: 1,
-    title: "Play: Who's That Pokémon?",
-    imageSrc: Silohuette,
-    subText:
-      "Think you know your Pokémon? Prove it! This game is all about guessing which Pokémon is hiding in the shadows. You'll see a blurry pic of a Pokémon and have to guess who it is.",
-    btn: {
-      name: "Play!",
-      to: "/videogame",
-    },
-  },
-  {
     id: 2,
     title: "Pokédex",
     imageSrc: Charizard3D,
@@ -23,6 +12,17 @@ export const CAROUSEL_SLIDES: Slide[] = [
     btn: {
       name: "Discover",
       to: "/pokedex",
+    },
+  },
+  {
+    id: 1,
+    title: "Play: Who's That Pokémon?",
+    imageSrc: Silohuette,
+    subText:
+      "Think you know your Pokémon? Prove it! This game is all about guessing which Pokémon is hiding in the shadows. You'll see a blurry pic of a Pokémon and have to guess who it is.",
+    btn: {
+      name: "Play!",
+      to: "/videogame",
     },
   },
 ];

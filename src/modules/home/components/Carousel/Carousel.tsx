@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Slide } from "@home/types";
-import CarouselSlide from "./CarouselSlide";
+import CarouselPanel from "./CarouselPanel";
 
 interface CarouselProps {
   slides: Slide[];
@@ -24,7 +24,7 @@ const Carousel = ({ slides, intervalMS }: CarouselProps) => {
   return (
     <Box position={"relative"}>
       {slides.map((panel, index) => (
-        <CarouselSlide
+        <CarouselPanel
           key={panel.id}
           panel={panel}
           activeSlideIndex={activeSlideIndex}

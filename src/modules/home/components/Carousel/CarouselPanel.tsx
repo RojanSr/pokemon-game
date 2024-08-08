@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import ToggleEffect from "@shared/components/common/ToggleEffect";
 import { Slide } from "@home/types";
 
-interface CarouselSlideProps {
+interface CarouselPanelProps {
   panel: Slide;
   activeSlideIndex: number;
   index: number;
 }
 
-const CarouselSlide = ({
+const CarouselPanel = ({
   panel,
   activeSlideIndex,
   index,
-}: CarouselSlideProps) => {
+}: CarouselPanelProps) => {
   return (
     <Grid
       width={"100%"}
@@ -71,4 +71,4 @@ const CarouselSlide = ({
   );
 };
 
-export default CarouselSlide;
+export default CarouselPanel;
