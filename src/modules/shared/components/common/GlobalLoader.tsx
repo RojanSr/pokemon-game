@@ -1,5 +1,4 @@
-import { Container } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
+import { Container, Spinner } from "@chakra-ui/react";
 
 const GlobalLoader = () => {
   return (
