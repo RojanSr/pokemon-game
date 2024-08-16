@@ -4,43 +4,39 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "pnpm run start",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "test": "pnpm run test"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
-    "@chakra-ui/layout": "2.3.1",
     "@chakra-ui/react": "^2.8.2",
-    "@chakra-ui/spinner": "^2.1.0",
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
-    "@tanstack/react-query": "^5.51.23",
-    "axios": "^1.7.4",
-    "framer-motion": "^11.3.28",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@tanstack/react-query": "^5.51.1",
+    "axios": "^1.7.2",
+    "framer-motion": "^11.3.24",
     "lottie-react": "^2.4.0",
     "lottie-web": "^5.12.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.2",
-    "react-icons": "^5.3.0",
-    "react-router-dom": "^6.26.1",
-    "zustand": "^4.5.5"
+    "react-hook-form": "^7.52.1",
+    "react-icons": "^5.2.1",
+    "react-router-dom": "^6.24.1",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "@types/node": "^22.3.0",
+    "@types/node": "^22.1.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "@vitejs/plugin-react-swc": "^3.7.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.9",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.1"
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1"
   }
 }
