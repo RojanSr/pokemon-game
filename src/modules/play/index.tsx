@@ -1,5 +1,7 @@
+import { Box } from "@chakra-ui/react";
+
 const VideoGames = () => {
-  return <div>VideoGames</div>;
+  return <Box></Box>;
 };
 
 export default VideoGames;
