@@ -22,4 +22,15 @@ export const theme = extendTheme({
       grey: "#9e9fa1",
     },
   },
+  fonts: {
+    heading: `'Nippo', sans-serif`,
+    body: `'Nippo', sans-serif`,
+  },
+  fontWeights: {
+    extraLight: 200,
+    light: 300,
+    normal: 400,
+    medium: 500,
+    bold: 700,
+  },
 });

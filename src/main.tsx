@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ChakraBaseProvider } from "@chakra-ui/react";
 import { theme } from "./modules/shared/theme/index.ts";
 import { router } from "./modules/shared/routes/routes.tsx";
+import "./styles.css";
 
 const queryClient = new QueryClient();
 

@@ -22,7 +22,7 @@ export const CAROUSEL_SLIDES: Slide[] = [
       "Think you know your Pokémon? Prove it! This game is all about guessing which Pokémon is hiding in the shadows. You'll see a blurry pic of a Pokémon and have to guess who it is.",
     btn: {
       name: "Play!",
-      to: "/videogame",
+      to: "/play",
     },
   },
 ];
