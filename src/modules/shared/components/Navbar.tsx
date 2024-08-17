@@ -36,8 +36,8 @@ const navItems: NavItem[] = [
   {
     id: 3,
     icon: ControllerInactive,
-    name: "Videogame",
-    to: routes.videogame,
+    name: "Play",
+    to: routes.play,
   },
   {
     id: 4,

@@ -5,10 +5,15 @@ import Pokedex from "../../pokedex";
 import Layout from "../layout";
 import PokeNews from "../../news";
 import ErrorPage from "../../../error-page";
-import VideoGames from "../../play";
+import Play from "../../play";
 import PokeTV from "../../tv";
 
 export const router = createBrowserRouter([
+  {
+    path: routes.play,
+    element: <Play />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: routes.home,
     element: (
@@ -29,10 +34,6 @@ export const router = createBrowserRouter([
       {
         path: routes.news,
         element: <PokeNews />,
-      },
-      {
-        path: routes.videogame,
-        element: <VideoGames />,
       },
       {
         path: routes.tv,

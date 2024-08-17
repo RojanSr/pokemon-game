@@ -2,7 +2,7 @@ export const routes = {
   home: "/",
   pokedex: "/pokedex",
   news: "/news",
-  videogame: "/videogame",
+  play: "/play",
   tv: "/tv",
 } as const;
 
