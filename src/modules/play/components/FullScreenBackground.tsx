@@ -1,11 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import GengarCoolJPG from "../assets/gengar-cool.jpg";
 
-const MenuBG = () => {
+const FullScreenBackground = ({ img }: { img: string }) => {
   return (
     <Box
       zIndex={-1}
-      bgImage={GengarCoolJPG}
+      bgImage={img}
       bgPosition="center"
       bgRepeat="no-repeat"
       bgSize="cover"
@@ -18,4 +17,4 @@ const MenuBG = () => {
   );
 };
 
-export default MenuBG;
+export default FullScreenBackground;

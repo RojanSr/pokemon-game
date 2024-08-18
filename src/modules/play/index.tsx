@@ -1,27 +1,17 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import MenuBG from "./components/MenuBG";
-import GameButton from "./components/GameButton";
-import Reveal from "@shared/components/common/Reveal";
+import { Box } from "@chakra-ui/react";
+import { useState } from "react";
+import Playground from "./components/Playground";
+import TitleScreen from "./components/TItleScreen/TitleScreen";
 
+export type DifficultyType = "easy" | "medium" | "hard" | "hardcore";
 const Play = () => {
+  const [difficulty, setDifficulty] = useState<DifficultyType>();
   return (
-    <Box fontFamily={"Nippo"} fontWeight={400} p={10}>
-      <MenuBG />
-      <Reveal>
-        <Text
-          fontWeight={700}
-          fontSize={"6rem"}
-          color={"#ADADAD"}
-          textShadow={"2px 2px 8px rgba(0, 0, 0, 0.5)"}
-        >
-          Main Menu
-        </Text>
-        <Flex flexDirection={"column"} gap={10} mt={"200px"}>
-          <GameButton w={"480px"}>Play</GameButton>
-          <GameButton w={"480px"}>Settings</GameButton>
-          <GameButton w={"480px"}>Exit</GameButton>
-        </Flex>
-      </Reveal>
+    <Box fontFamily={"Nippo, Poppins"} fontWeight={400} p={10}>
+      {!difficulty && <TitleScreen setDifficulty={setDifficulty} />}
+
+      {/* Start the game when difficulty is set */}
+      {!!difficulty && <Playground />}
     </Box>
   );
 };
