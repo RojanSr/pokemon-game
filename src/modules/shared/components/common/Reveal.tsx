@@ -6,12 +6,14 @@ interface RevealProps extends BoxProps {
   children: React.ReactNode;
   width?: string;
   revealAmount?: number;
+  delay?: number;
 }
 
 const Reveal = ({
   children,
   width = "inherit",
   revealAmount = 0.5,
+  delay = 0,
   ...boxProps
 }: RevealProps) => {
   const ref = useRef(null);
@@ -37,7 +39,7 @@ const Reveal = ({
         }}
         initial="hidden"
         animate={mainControls}
-        transition={{ duration: 0.5, delay: 0.25 }}
+        transition={{ duration: 0.5, delay: delay }}
       >
         {children}
       </motion.div>
