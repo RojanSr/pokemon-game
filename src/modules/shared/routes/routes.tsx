@@ -7,11 +7,17 @@ import PokeNews from "../../news";
 import ErrorPage from "../../../error-page";
 import Play from "../../play";
 import PokeTV from "../../tv";
+import PlayGround from "@play/components/PlayGround/PlayGround";
 
 export const router = createBrowserRouter([
   {
     path: routes.play,
     element: <Play />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: routes.playground,
+    element: <PlayGround />,
     errorElement: <ErrorPage />,
   },
   {

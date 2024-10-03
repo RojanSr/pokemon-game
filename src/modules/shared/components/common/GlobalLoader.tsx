@@ -1,7 +1,8 @@
 import { Container } from "@chakra-ui/layout";
+import { SpinnerProps } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/spinner";
 
-const GlobalLoader = () => {
+const GlobalLoader = (props: SpinnerProps) => {
   return (
     <Container
       position={"fixed"}
@@ -18,6 +19,7 @@ const GlobalLoader = () => {
         emptyColor="gray.200"
         color="primary.red"
         size="xl"
+        {...props}
       />
     </Container>
   );

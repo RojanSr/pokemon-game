@@ -1,6 +1,17 @@
 import { Box } from "@chakra-ui/react";
 
-const FullScreenBackground = ({ img }: { img: string }) => {
+const FullScreenBackground = ({
+  img,
+  brightness,
+}: {
+  img: string;
+  brightness?: number;
+}) => {
+  const validatedBrightness =
+    typeof brightness === "number" && brightness >= 0 && brightness <= 100
+      ? brightness
+      : 60; // default value or handle error as needed
+
   return (
     <Box
       zIndex={-1}
@@ -12,7 +23,7 @@ const FullScreenBackground = ({ img }: { img: string }) => {
       inset={0}
       w={"100dvw"}
       h={"100dvh"}
-      filter={"brightness(60%)"}
+      filter={`brightness(${validatedBrightness}%)`}
     ></Box>
   );
 };

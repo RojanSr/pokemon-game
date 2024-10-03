@@ -3,12 +3,12 @@ import GameButton from "../GameButton";
 import Reveal from "@shared/components/common/Reveal";
 import { DifficultyType } from "@play/index";
 import { MenuBtnType } from "./TitleScreen";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { routes } from "@shared/routes/constants";
 
 type ChooseDifficultyProps = {
   setClickedBtn: React.Dispatch<React.SetStateAction<MenuBtnType | undefined>>;
-  setDifficulty: React.Dispatch<
-    React.SetStateAction<DifficultyType | undefined>
-  >;
 };
 
 const difficultyBtn: Record<DifficultyType, { color: string; text: string }> = {
@@ -18,10 +18,19 @@ const difficultyBtn: Record<DifficultyType, { color: string; text: string }> = {
   hardcore: { color: "red.800", text: "Hardcore" },
 };
 
-const ChooseDifficulty = ({
-  setClickedBtn,
-  setDifficulty,
-}: ChooseDifficultyProps) => {
+const ChooseDifficulty = ({ setClickedBtn }: ChooseDifficultyProps) => {
+  const [difficulty, setDifficulty] = useState<DifficultyType>();
+
+  const navigate = useNavigate();
+
+  if (difficulty) {
+    navigate(routes.playground, {
+      state: {
+        difficulty,
+      },
+    });
+  }
+
   return (
     <>
       <Reveal>
