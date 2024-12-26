@@ -12,7 +12,7 @@ interface Props {
 }
 
 const PokeCard = ({ name, image, types, id }: Props) => {
-  const selectedID = usePokeStore((store) => store.pokeState.selectedID);
+  const selectedID = usePokeStore((store) => store.value.selectedID);
   return (
     <Reveal>
       <Flex

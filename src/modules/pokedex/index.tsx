@@ -20,7 +20,7 @@ const Pokedex = () => {
   const [pagination, setPagination] =
     useState<PaginationOptions>(defaultPagination);
 
-  const setSelectedID = usePokeStore((store) => store.setSelectedID);
+  const setSelectedID = usePokeStore((store) => store.setter.setSelectedID);
 
   const { data, isFetching } = useFetchPokemonList({
     searchQuery: searchQuery?.pokemon_name,

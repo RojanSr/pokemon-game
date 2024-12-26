@@ -1,25 +1,41 @@
 import { create } from "zustand";
 
-const initialState = {
-  pokeState: {
+type PokeStoreType = {
+  value: {
+    selectedID: number;
+    isMusicPlaying: boolean;
+  };
+  setter: {
+    setSelectedID: (value: number) => void;
+    setIsMusicPlaying: (value: boolean) => void;
+  };
+  clearPokeStore: () => void;
+};
+
+const initialState: Omit<PokeStoreType, "setter" | "clearPokeStore"> = {
+  value: {
     selectedID: 0,
+    isMusicPlaying: false,
   },
 };
 
-export const usePokeStore = create<{
-  pokeState: {
-    selectedID: number;
-  };
-  setSelectedID: (value: number) => void;
-  clearPokeStore: () => void;
-}>()((set) => ({
+export const usePokeStore = create<PokeStoreType>()((set) => ({
   ...initialState,
-  setSelectedID(value) {
-    set((state) => {
-      return {
-        pokeState: { ...state.pokeState, selectedID: value },
-      };
-    });
+  setter: {
+    setSelectedID(value) {
+      set((state) => {
+        return {
+          value: { ...state.value, selectedID: value },
+        };
+      });
+    },
+    setIsMusicPlaying(value) {
+      set((state) => {
+        return {
+          value: { ...state.value, isMusicPlaying: value },
+        };
+      });
+    },
   },
   clearPokeStore() {
     set(initialState);
