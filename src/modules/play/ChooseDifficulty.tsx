@@ -1,8 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
-import GameButton from "../GameButton";
+import GameButton from "./components/GameButton";
 import Reveal from "@shared/components/common/Reveal";
-import { DifficultyType } from "@play/index";
-import { MenuBtnType } from "./TitleScreen";
+import { DifficultyType, MenuBtnType } from "@play/Play";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@shared/routes/constants";

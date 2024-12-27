@@ -1,10 +1,10 @@
 import { Flex, Text } from "@chakra-ui/react";
 import Reveal from "@shared/components/common/Reveal";
 import { useNavigate } from "react-router-dom";
-import GameButton from "../GameButton";
-import { MenuBtnType } from "./TitleScreen";
+import GameButton from "./components/GameButton";
 import { UseAudioReturnType } from "@shared/hooks/useAudio";
 import useActiveBtnToggler from "@shared/hooks/useActiveBtnToggler";
+import { MenuBtnType } from "./Play";
 
 type MainMenuProps = {
   setClickedBtn: React.Dispatch<React.SetStateAction<MenuBtnType | undefined>>;
@@ -18,7 +18,7 @@ const mainMenuButtons: Record<MenuBtnType, { color: string; text: string }> = {
 
 const MainMenu = ({
   setClickedBtn,
-  toggle: toogleMusic,
+  toggle: toggleMusic,
   playing,
   stop: stopMusic,
 }: MainMenuProps) => {
@@ -37,7 +37,7 @@ const MainMenu = ({
           >
             Main Menu
           </Text>
-          <GameButton onClick={toogleMusic}>
+          <GameButton onClick={playing ? stopMusic : toggleMusic}>
             Music:
             <Text as={"span"} color={playing ? "green" : "red"} pl={"0.2em"}>
               {playing ? "ON" : "OFF"}
@@ -47,21 +47,6 @@ const MainMenu = ({
       </Reveal>
       <Reveal delay={0.25}>
         <Flex flexDirection={"column"} gap={10} mt={"200px"}>
-          {/* <GameButton w={"480px"} onClick={() => setClickedBtn("play")}>
-            Play
-          </GameButton>
-          <GameButton w={"480px"} onClick={() => setClickedBtn("settings")}>
-            Settings
-          </GameButton>
-          <GameButton
-            w={"480px"}
-            onClick={() => {
-              navigate("/");
-              stopMusic();
-            }}
-          >
-            Exit
-          </GameButton> */}
           {(Object.keys(mainMenuButtons) as MenuBtnType[]).map((btn) => (
             <GameButton
               w={"480px"}

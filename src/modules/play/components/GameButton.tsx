@@ -33,7 +33,10 @@ const GameButton = ({
   return (
     <Button
       ref={buttonRef}
-      bgColor={isActive ? "#fefefe" : "#ADADAD"}
+      bgColor={isActive ? "#faf5ef" : "#ADADAD"}
+      _hover={{
+        bgColor: "#faf5ef",
+      }}
       position={"relative"}
       fontSize={"30px"}
       py={6}

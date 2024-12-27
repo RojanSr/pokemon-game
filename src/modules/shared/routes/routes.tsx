@@ -5,7 +5,7 @@ import Pokedex from "../../pokedex";
 import Layout from "../layout";
 import PokeNews from "../../news";
 import ErrorPage from "../../../error-page";
-import Play from "../../play";
+import Play from "../../play/Play";
 import PokeTV from "../../tv";
 import PlayGround from "@play/components/PlayGround/PlayGround";
 
