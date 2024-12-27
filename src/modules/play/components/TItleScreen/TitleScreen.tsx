@@ -5,7 +5,7 @@ import FullScreenBackground from "../FullScreenBackground";
 import GengarBg from "../../assets/gengar-cool.jpg";
 import { UseAudioReturnType } from "@shared/hooks/useAudio";
 
-export type MenuBtnType = "play" | "settings";
+export type MenuBtnType = "play" | "settings" | "exit";
 
 const TitleScreen = (props: UseAudioReturnType) => {
   const [clickedBtn, setClickedBtn] = useState<MenuBtnType | undefined>();
