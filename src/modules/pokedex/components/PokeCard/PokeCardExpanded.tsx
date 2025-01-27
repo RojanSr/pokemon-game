@@ -6,7 +6,8 @@ import {
   Grid,
   GridItem,
   Image,
-  Spinner,
+  Skeleton,
+  Stack,
   Text,
   Tooltip,
 } from "@chakra-ui/react";
@@ -25,6 +26,64 @@ import CapsuleText from "@shared/components/common/CapsuleText";
 interface Props {
   list: PokemonDetails | undefined;
 }
+
+const PokeCardExpandedSkeleton = () => {
+  return (
+    <Box position={"sticky"} top={10}>
+      <Box
+        bg={"white"}
+        p={4}
+        display={"flex"}
+        alignItems={"center"}
+        flexDirection={"column"}
+        borderRadius={"18px"}
+        boxShadow={"0 4px 8px rgba(0, 0, 0, 0.05)"}
+        w={"300px"}
+        position={"relative"}
+      >
+        <Skeleton
+          position={"absolute"}
+          left={"50%"}
+          right={"50%"}
+          transform={"translateX(-50%)"}
+          w={"64px"}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          h={"64px"}
+        />
+        <Stack mt={"90px"} align={"center"}>
+          <Skeleton w={"26px"} h={"14px"} />
+          <Skeleton w={"140px"} h={"24px"} />
+          <Skeleton w={"100px"} h={"18px"} />
+        </Stack>
+
+        <Skeleton w={"80px"} h={"20px"} my={6} />
+
+        <Stack align={"center"}>
+          <Skeleton w={"200px"} h={"14px"} />
+          <Skeleton w={"200px"} h={"14px"} />
+          <Skeleton w={"180px"} h={"14px"} />
+        </Stack>
+
+        <Skeleton w={"80px"} h={"20px"} my={6} />
+
+        <Stack align={"center"}>
+          <Skeleton w={"200px"} h={"14px"} />
+          <Skeleton w={"200px"} h={"14px"} />
+          <Skeleton w={"180px"} h={"14px"} />
+        </Stack>
+
+        <Skeleton w={"80px"} h={"20px"} my={6} />
+
+        <Stack align={"center"}>
+          <Skeleton w={"200px"} h={"14px"} />
+          <Skeleton w={"180px"} h={"14px"} />
+        </Stack>
+      </Box>
+    </Box>
+  );
+};
 
 const PokeCardExpanded = ({ list }: Props) => {
   const queryClient = useQueryClient();
@@ -51,11 +110,7 @@ const PokeCardExpanded = ({ list }: Props) => {
   }, [list, list?.name, queryClient]);
 
   if (isLoading || !list) {
-    return (
-      <Center w={"300px"} h={"100%"}>
-        <Spinner />
-      </Center>
-    );
+    return <PokeCardExpandedSkeleton />;
   }
 
   if (isError) {

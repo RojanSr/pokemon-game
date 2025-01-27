@@ -1,4 +1,4 @@
-import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Skeleton, Stack, Text } from "@chakra-ui/react";
 import { PokemonDetails } from "@pokedex/types";
 import { usePokeStore } from "@shared/store/pokemonStore";
 import PokeTypeBadges from "../PokeTypeBadges/PokeTypeBadges";
@@ -10,6 +10,39 @@ interface Props {
   id: number;
   types: PokemonDetails["types"];
 }
+
+export const PokeCardSkeleton = () => {
+  return (
+    <Flex
+      position="relative"
+      bg={"white"}
+      py={4}
+      px={"80px"}
+      flexDirection={"column"}
+      borderRadius={"18px"}
+      boxShadow={"0 4px 8px rgba(0, 0, 0, 0.05)"}
+      maxW={"260px"}
+      cursor={"pointer"}
+      transition={"0.05s ease-in-out"}
+    >
+      <Skeleton
+        w="80px"
+        h="80px"
+        position="absolute"
+        top="-10%"
+        left="50%"
+        transform="translateX(-50%)"
+        borderRadius="20%"
+        zIndex={2}
+      />
+      <Stack mt={16} alignItems="center">
+        <Skeleton w="40px" h="14px" />
+        <Skeleton w="100px" h="18px" />
+        <Skeleton w="140px" h="22px" />
+      </Stack>
+    </Flex>
+  );
+};
 
 const PokeCard = ({ name, image, types, id }: Props) => {
   const selectedID = usePokeStore((store) => store.value.selectedID);
