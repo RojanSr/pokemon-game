@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Box, Center, Grid, GridItem, Spinner } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import useFetchPokemonList from "./hooks/useFetchPokemonList";
-import PokeCard from "./components/PokeCard/PokeCard";
+import PokeCard, { PokeCardSkeleton } from "./components/PokeCard/PokeCard";
 import PokeCardExpanded from "./components/PokeCard/PokeCardExpanded";
 import PokeSearch, { PokemonSearchField } from "./components/Search/PokeSearch";
 import { PokemonDetails } from "./types";
@@ -22,7 +22,7 @@ const Pokedex = () => {
 
   const setSelectedID = usePokeStore((store) => store.setter.setSelectedID);
 
-  const { data, isFetching } = useFetchPokemonList({
+  const { data, isLoading } = useFetchPokemonList({
     searchQuery: searchQuery?.pokemon_name,
     pagination: pagination,
   });
@@ -59,38 +59,38 @@ const Pokedex = () => {
       >
         <GridItem>
           <PokeSearch setSearchQuery={setSearchQuery} />
-          {isFetching ? (
-            <Center mt={10}>
-              <Spinner size={"lg"} thickness="4px" color="primary.red" />
-            </Center>
-          ) : (
-            <Grid
-              templateColumns={{
-                base: "repeat(2, 1fr)",
-                "2xl": "repeat(4, 1fr)",
-                lg: "repeat(4, 1fr)",
-              }}
-              columnGap={6}
-              rowGap={12}
-              mt={10}
-            >
-              {data?.results?.map((pokemon) => {
-                return (
-                  <GridItem
-                    key={pokemon.id}
-                    onClick={() => handleClick(pokemon)}
-                  >
-                    <PokeCard
-                      name={pokemon.name || ""}
-                      image={pokemon.sprites.front_default}
-                      id={pokemon.id}
-                      types={pokemon.types}
-                    />
+          <Grid
+            templateColumns={{
+              base: "repeat(2, 1fr)",
+              "2xl": "repeat(4, 1fr)",
+              lg: "repeat(4, 1fr)",
+            }}
+            columnGap={6}
+            rowGap={12}
+            mt={10}
+          >
+            {isLoading
+              ? Array.from({ length: pagination.limit }).map((_, index) => (
+                  <GridItem key={index}>
+                    <PokeCardSkeleton />
                   </GridItem>
-                );
-              })}
-            </Grid>
-          )}
+                ))
+              : data?.results?.map((pokemon) => {
+                  return (
+                    <GridItem
+                      key={pokemon.id}
+                      onClick={() => handleClick(pokemon)}
+                    >
+                      <PokeCard
+                        name={pokemon.name || ""}
+                        image={pokemon.sprites.front_default}
+                        id={pokemon.id}
+                        types={pokemon.types}
+                      />
+                    </GridItem>
+                  );
+                })}
+          </Grid>
         </GridItem>
 
         <GridItem>
