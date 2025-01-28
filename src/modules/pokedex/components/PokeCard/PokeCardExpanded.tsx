@@ -22,6 +22,7 @@ import { PokemonDetails } from "@pokedex/types";
 import { noOfBadgesToShow } from "@shared/constants";
 import hoverShowTypes from "@pokedex/utils/hoverShowTypes";
 import CapsuleText from "@shared/components/common/CapsuleText";
+import questionMarkImage from "@shared/assets/question_mark.png";
 
 interface Props {
   list: PokemonDetails | undefined;
@@ -95,6 +96,16 @@ const PokeCardExpanded = ({ list }: Props) => {
 
   const { data, isLoading, isError } = useFetchPokemonDetails(pokeName || "");
 
+  const playSound = () => {
+    if (list?.cries?.latest) {
+      const audio = new Audio(list.cries.latest);
+      audio.play();
+    } else if (list?.cries?.legacy) {
+      const audio = new Audio(list.cries.latest);
+      audio.play();
+    }
+  };
+
   useEffect(() => {
     if (data) {
       setGenera(
@@ -114,18 +125,44 @@ const PokeCardExpanded = ({ list }: Props) => {
   }
 
   if (isError) {
-    return <Text>Error Occured</Text>;
+    return (
+      <Box
+        bg={"white"}
+        p={4}
+        display={"flex"}
+        alignItems={"center"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+        borderRadius={"18px"}
+        boxShadow={"0 4px 8px rgba(0, 0, 0, 0.05)"}
+        w={"300px"}
+        h={"700px"}
+        position={"relative"}
+      >
+        <Flex transform={"translateY(-30px)"}>
+          <Image
+            src={questionMarkImage}
+            w={"80px"}
+            h={"100px"}
+            transform={"rotate(-40deg)"}
+          />
+          <Image
+            src={questionMarkImage}
+            w={"80px"}
+            h={"100px"}
+            transform={"translateY(-30px)"}
+          />
+          <Image
+            src={questionMarkImage}
+            w={"80px"}
+            h={"100px"}
+            transform={"rotate(40deg)"}
+          />
+        </Flex>
+        <Text fontWeight={"semibold"}>No Record Found</Text>
+      </Box>
+    );
   }
-
-  const playSound = () => {
-    if (list?.cries?.latest) {
-      const audio = new Audio(list.cries.latest);
-      audio.play();
-    } else if (list?.cries?.legacy) {
-      const audio = new Audio(list.cries.latest);
-      audio.play();
-    }
-  };
 
   return (
     <Box position={"sticky"} top={10}>

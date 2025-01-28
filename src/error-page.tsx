@@ -1,7 +1,6 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { useRouteError } from "react-router-dom";
-import errorAnimation from "@shared/assets/lottie/lottieErrorAnimation.json";
-import LottieAnimation from "@shared/components/LottieAnimation";
+import confusedPsyduck from "@shared/assets/psyduck_confuse.gif";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -22,10 +21,15 @@ export default function ErrorPage() {
       w={"100vw"}
       h={"100vh"}
       transform={"translateY(-10%)"}
+      color={"black"}
+      bg={"white"}
     >
-      <Box w={"200px"} h={"200px"} mb={"50px"}>
-        <LottieAnimation animationJSON={errorAnimation} />
-      </Box>
+      <Image
+        src={confusedPsyduck}
+        height={"220px"}
+        aspectRatio={"1:1"}
+        mb={"20px"}
+      />
       <Text fontSize={"22px"} fontWeight={"600"}>
         Oops!
       </Text>

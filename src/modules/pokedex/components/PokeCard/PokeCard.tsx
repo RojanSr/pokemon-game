@@ -3,12 +3,13 @@ import { PokemonDetails } from "@pokedex/types";
 import { usePokeStore } from "@shared/store/pokemonStore";
 import PokeTypeBadges from "../PokeTypeBadges/PokeTypeBadges";
 import Reveal from "@shared/components/common/Reveal";
+import questionMarkImg from "@shared/assets/question_mark.png";
 
 interface Props {
   name: string;
-  image: string;
   id: number;
   types: PokemonDetails["types"];
+  image?: string; // No image for some pokemon
 }
 
 export const PokeCardSkeleton = () => {
@@ -73,10 +74,10 @@ const PokeCard = ({ name, image, types, id }: Props) => {
               ? "translateX(-50%) scale(1.3)"
               : "translateX(-50%)"
           }
-          bgImage={image}
+          bgImage={image || questionMarkImg}
           bgRepeat={"no-repeat"}
           bgPosition={"center"}
-          bgSize={"cover"}
+          bgSize={image ? "cover" : "70%"}
           zIndex={2}
           transition={"0.2s ease-in-out"}
         ></Box>

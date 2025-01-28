@@ -6,6 +6,7 @@ export const theme = extendTheme({
       body: {
         bg: "#f6f8fc",
         fontFamily: "Poppins, Arial, sans-serif",
+        color: "white",
       },
     },
   },

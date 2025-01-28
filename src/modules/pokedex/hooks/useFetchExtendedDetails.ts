@@ -1,8 +1,7 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { PokemonGrowthRate } from "@shared/constants";
 import { api } from "@shared/api";
-import { reponseErrorHandler, ResponseData } from "@shared/utils/helper";
 
 interface PokemonSpeciesResponse {
   evolves_from_species: { name: string };
@@ -20,7 +19,7 @@ const fetchExtendedDetails = async (pokemonName: string) => {
     );
     return response;
   } catch (err) {
-    reponseErrorHandler(err as AxiosError<ResponseData, unknown>);
+    // reponseErrorHandler(err as AxiosError<ResponseData, unknown>);
     console.error(err);
   }
 };
