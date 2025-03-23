@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "@shared/api";
 import { PokemonDetails } from "@pokedex/types";
 
-const fetchPokemon = async (name: string) => {
+export const fetchPokemon = async (name: string) => {
   try {
     const response = await axios.get<PokemonDetails>(
       `${api.pokedex.pokemon_data}/${name}`
@@ -17,7 +17,7 @@ const fetchPokemon = async (name: string) => {
 
 const useFetchPokemon = (name: string) => {
   return useQuery({
-    queryKey: [api.pokedex.pokemon_data],
+    queryKey: [api.pokedex.pokemon_data, name],
     queryFn: () => fetchPokemon(name),
     select: (data) => data?.data,
     enabled: !!name,

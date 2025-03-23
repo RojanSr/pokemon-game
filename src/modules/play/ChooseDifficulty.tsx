@@ -2,12 +2,11 @@ import { Box, Flex, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import GameButton from "./components/GameButton";
 import Reveal from "@shared/components/common/Reveal";
 import { DifficultyType, MenuBtnType } from "@play/Play";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "@shared/routes/constants";
 import useActiveBtnToggler from "@shared/hooks/useActiveBtnToggler";
-import { difficultyDescription } from "@shared/constants/difficultyDesciption";
 import ActivePokeballSVG from "@shared/assets/active/pokeball.svg";
+import { DIFFICULTY_DESCRIPTION } from "@shared/constants/game";
 
 type ChooseDifficultyProps = {
   setClickedBtn: React.Dispatch<React.SetStateAction<MenuBtnType | undefined>>;
@@ -41,7 +40,7 @@ const PreviewDifficulty = ({ difficulty }: { difficulty: DifficultyType }) => {
         mt={"30px"}
         listStyleType={"none"}
       >
-        {difficultyDescription[difficulty].map((desc) => (
+        {DIFFICULTY_DESCRIPTION[difficulty].map((desc) => (
           <ListItem
             display={"flex"}
             alignItems={"center"}
@@ -64,18 +63,8 @@ const PreviewDifficulty = ({ difficulty }: { difficulty: DifficultyType }) => {
 };
 
 const ChooseDifficulty = ({ setClickedBtn }: ChooseDifficultyProps) => {
-  const [difficulty, setDifficulty] = useState<DifficultyType>();
   const { activeOption } = useActiveBtnToggler(Object.keys(buttons));
-
   const navigate = useNavigate();
-
-  if (difficulty) {
-    navigate(routes.playground, {
-      state: {
-        difficulty,
-      },
-    });
-  }
 
   return (
     <>
@@ -101,7 +90,11 @@ const ChooseDifficulty = ({ setClickedBtn }: ChooseDifficultyProps) => {
                   if (key === "menu") {
                     setClickedBtn(undefined);
                   } else {
-                    setDifficulty(key);
+                    navigate(routes.playground, {
+                      state: {
+                        difficulty: key,
+                      },
+                    });
                   }
                 }}
                 isActive={key === activeOption}

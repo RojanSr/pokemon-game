@@ -47,3 +47,14 @@ export const defaultPagination: PaginationOptions = {
   limit: 12,
   offset: 0,
 };
+
+export type PokeRegions =
+  | "kanto"
+  | "johto"
+  | "hoenn"
+  | "sinnoh"
+  | "unova"
+  | "kalos"
+  | "alola"
+  | "galar"
+  | "paldea";
