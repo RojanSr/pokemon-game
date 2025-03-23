@@ -1,18 +1,6 @@
-import {
-  Box,
-  Flex,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Tooltip,
-} from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
+import { Flex, HStack, Image, Text, Tooltip } from "@chakra-ui/react";
 import PrimaryLogo from "../assets/primary_logo.svg";
-import { Link, useLocation } from "react-router-dom";
-import { CgMenuGridO } from "react-icons/cg";
-import ToggleEffect from "./common/ToggleEffect";
-import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import PokedexInactive from "../assets/inactive/pokedex.svg";
 import ControllerInactive from "../assets/inactive/controller.svg";
 import TelevisionInactive from "../assets/inactive/television.svg";
@@ -54,111 +42,56 @@ const navItems: NavItem[] = [
 ];
 
 const Navbar = () => {
-  const location = useLocation();
-
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [height, setHeight] = useState("0px");
-  const flexRef = useRef<HTMLDivElement>(null);
-
-  // Dynamically setting height of the menu
-  useEffect(() => {
-    if (flexRef.current) {
-      setHeight(menuOpen ? `${flexRef.current.scrollHeight}px` : "0px");
-    }
-  }, [menuOpen]);
-
   return (
-    <Flex py={5} justifyContent={"space-between"} gap={6}>
+    <Flex
+      display={"flex"}
+      bg={"white"}
+      borderRadius={"12px"}
+      alignItems={"center"}
+      boxShadow={"0 4px 8px rgba(0, 0, 0, 0.1)"}
+      gap={8}
+      px={8}
+      py={2}
+      my={5}
+      justifyContent={"space-between"}
+    >
       <Link to={routes.home}>
-        <Image src={PrimaryLogo} alt="Pokemon" h={"70px"} minW={"100px"} />
+        <Image src={PrimaryLogo} alt="Pokemon" h={"50px"} minW={"100px"} />
       </Link>
-
-      <Flex alignItems={"center"} gap={{ sm: "10px", lg: "25px" }}>
-        <InputGroup size={"sm"}>
-          <Input
-            placeholder="Search"
-            bg={"white"}
-            w={{ base: "120px", md: "200px" }}
-            borderRadius={"30px"}
-            _placeholder={{ color: "black", opacity: 1 }}
-            _focus={{
-              width: { base: "130px", md: "230px" },
-              outline: "none",
-              boxShadow: "none",
-            }}
-            border={"none"}
-            transition={"ease-in-out 0.2s"}
-          />
-          <InputLeftElement
-            pointerEvents="none"
-            color="text.dark"
-            fontSize="1em"
-          >
-            <Search2Icon />
-          </InputLeftElement>
-        </InputGroup>
-
-        <Box position={"relative"}>
-          <ToggleEffect onClick={() => setMenuOpen((prev) => !prev)}>
-            <CgMenuGridO
-              color={location.pathname === "/" ? "white" : "black"}
-              fontSize={"35px"}
-              cursor={"pointer"}
-            />
-          </ToggleEffect>
-
-          <Flex
-            ref={flexRef}
-            height={height}
-            display={menuOpen ? "flex" : "none"}
-            flexDirection={"column"}
-            position={"absolute"}
-            bg={"white"}
-            transform={"translateX(-50%)"}
-            left={"50%"}
-            borderRadius={"12px"}
-            width={"50px"}
-            alignItems={"center"}
-            zIndex={1000}
-            transitionProperty={"display opacity"}
-            transitionDuration={"0.4s"}
-            // NOTE: Only works on chrome and safari
-            sx={{
-              transitionBehavior: "allow-discrete",
-            }}
-            boxShadow={"0 4px 8px rgba(0, 0, 0, 0.1)"}
-          >
-            {navItems.map((nav) => {
-              return (
-                <Box
-                  key={nav.id}
-                  opacity={menuOpen ? 1 : 0}
-                  transitionProperty={"opacity"}
-                  transitionDuration={"0.3s"}
-                  sx={{
-                    transitionBehavior: "allow-discrete",
-                  }}
-                  py={4}
-                  onClick={() => {
-                    setMenuOpen(false);
-                    setHeight("0");
-                  }}
+      <HStack gap={8}>
+        {navItems.map((nav) => {
+          return (
+            <Link to={nav.to}>
+              <Flex
+                key={nav.id}
+                transitionProperty={"opacity"}
+                transitionDuration={"0.3s"}
+                sx={{
+                  transitionBehavior: "allow-discrete",
+                }}
+                py={4}
+                alignItems={"center"}
+                gap={4}
+              >
+                <Tooltip
+                  label={nav.name}
+                  borderRadius={"12px"}
+                  fontSize={"14px"}
                 >
-                  <Link to={nav.to}>
-                    <Tooltip
-                      label={nav.name}
-                      borderRadius={"12px"}
-                      fontSize={"14px"}
-                    >
-                      <Image src={nav.icon} w={6} h={6} />
-                    </Tooltip>
-                  </Link>
-                </Box>
-              );
-            })}
-          </Flex>
-        </Box>
-      </Flex>
+                  <Image src={nav.icon} w={6} h={6} />
+                </Tooltip>
+                <Text
+                  fontSize={"lg"}
+                  fontWeight={"600"}
+                  color={"blackAlpha.700"}
+                >
+                  {nav.name}
+                </Text>
+              </Flex>
+            </Link>
+          );
+        })}
+      </HStack>
     </Flex>
   );
 };

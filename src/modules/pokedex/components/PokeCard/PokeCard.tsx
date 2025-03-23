@@ -53,11 +53,12 @@ const PokeCard = ({ name, image, types, id }: Props) => {
         position="relative"
         bg={"white"}
         py={4}
-        px={"80px"}
+        // px={"80px"}
         flexDirection={"column"}
         borderRadius={"18px"}
         boxShadow={"0 4px 8px rgba(0, 0, 0, 0.05)"}
-        maxW={"260px"}
+        // maxW={"260px"}
+        w={"100%"}
         cursor={"pointer"}
         outline={selectedID === id ? "3px solid #de3b5e" : ""}
         transition={"0.05s ease-in-out"}

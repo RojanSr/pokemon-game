@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import useFetchPokemonList from "./hooks/useFetchPokemonList";
 import PokeCard, { PokeCardSkeleton } from "./components/PokeCard/PokeCard";
 import PokeCardExpanded from "./components/PokeCard/PokeCardExpanded";
@@ -19,6 +25,8 @@ const Pokedex = () => {
   const [searchQuery, setSearchQuery] = useState<PokemonSearchField>();
   const [pagination, setPagination] =
     useState<PaginationOptions>(defaultPagination);
+
+  const isMobile = useBreakpointValue({ base: true, md: true, lg: false });
 
   const setSelectedID = usePokeStore((store) => store.setter.setSelectedID);
 
@@ -48,21 +56,21 @@ const Pokedex = () => {
 
   return (
     <>
-      <Grid
+      <Flex
         gap={4}
-        templateColumns={{
-          base: "1fr",
-          md: "3fr 1fr",
-          lg: "3fr 1fr",
-          "2xl": "3fr 1fr",
-        }}
+        overflow="hidden"
+        w={"100%"}
+        flexWrap={isMobile ? "wrap" : "nowrap"}
+        justifyContent={"center"}
       >
-        <GridItem>
+        <Box maxW={"100%"}>
+          <PokeCardExpanded list={selected} />
+        </Box>
+        <Box flex={1} maxW={"100%"}>
           <PokeSearch setSearchQuery={setSearchQuery} />
           <Grid
             templateColumns={{
-              base: "repeat(2, 1fr)",
-              "2xl": "repeat(4, 1fr)",
+              base: "repeat(1, 1fr)",
               lg: "repeat(4, 1fr)",
             }}
             columnGap={6}
@@ -80,6 +88,7 @@ const Pokedex = () => {
                     <GridItem
                       key={pokemon.id}
                       onClick={() => handleClick(pokemon)}
+                      mx={6}
                     >
                       <PokeCard
                         name={pokemon.name || ""}
@@ -91,12 +100,8 @@ const Pokedex = () => {
                   );
                 })}
           </Grid>
-        </GridItem>
-
-        <GridItem>
-          <PokeCardExpanded list={selected} />
-        </GridItem>
-      </Grid>
+        </Box>
+      </Flex>
       <Box my={8}>
         <Pagination
           offset={pagination.offset}
